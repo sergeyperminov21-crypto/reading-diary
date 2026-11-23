@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Личный дневник чтения: записывайте книги, оценки, цитаты и впечатления.">
+  <title>Дневник чтения</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📖</text></svg>">
+</head>
+<body>
+
+<header>
+  <div class="ornament">✦ ❦ ✦</div>
+  <h1>Дневник чтения</h1>
+  <p>Каждая книга — это прожитая жизнь. Не потеряй ни одной.</p>
+</header>
+
+<div class="wrap">
+
+  <section class="stats" aria-label="Статистика">
+    <div class="stat"><b id="statTotal">0</b><span>Всего книг</span></div>
+    <div class="stat"><b id="statRead">0</b><span>Прочитано</span></div>
+    <div class="stat"><b id="statPages">0</b><span>Страниц</span></div>
+    <div class="stat"><b id="statRating">—</b><span>Средняя оценка</span></div>
+  </section>
+
+  <div class="toolbar">
+    <div class="search">
+      <input type="search" id="searchInput" placeholder="Поиск по названию, автору, отзыву…" aria-label="Поиск">
+    </div>
+
+    <div class="chips" id="chips" role="tablist" aria-label="Фильтр по статусу">
+      <button class="chip active" data-status="all" role="tab">Все</button>
+      <button class="chip" data-status="want" role="tab">Хочу</button>
+      <button class="chip" data-status="reading" role="tab">Читаю</button>
+      <button class="chip" data-status="read" role="tab">Прочитано</button>
+    </div>
+
+    <select id="sortSelect" aria-label="Сортировка">
+      <option value="recent">Сначала новые</option>
+      <option value="title">По названию</option>
+      <option value="author">По автору</option>
+      <option value="rating">По оценке</option>
+      <option value="pages">По объёму</option>
+    </select>
+
+    <button class="btn btn-primary" id="addBtn">＋ Добавить книгу</button>
+    <button class="btn" id="exportBtn" title="Скачать резервную копию" aria-label="Экспорт">⤓</button>
+    <label class="btn" title="Загрузить из файла" style="cursor:pointer" aria-label="Импорт">
+      ⤒<input type="file" id="importInput" accept="application/json" hidden>
+    </label>
+  </div>
+
+  <div class="grid" id="grid"></div>
+</div>
+
+<dialog id="bookDialog">
+  <form id="bookForm">
+    <h2 id="dialogTitle">Новая книга</h2>
+
+    <div class="field">
+      <label for="f-title">Название *</label>
+      <input id="f-title" required maxlength="200" placeholder="Например, «Мастер и Маргарита»">
+    </div>
+
+    <div class="row">
+      <div class="field">
+        <label for="f-author">Автор</label>
+        <input id="f-author" maxlength="120" placeholder="Михаил Булгаков">
+      </div>
+      <div class="field">
+        <label for="f-genre">Жанр</label>
+        <input id="f-genre" maxlength="60" placeholder="Роман">
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="field">
+        <label for="f-pages">Страниц</label>
+        <input id="f-pages" type="number" min="0" max="99999" placeholder="480">
+      </div>
+      <div class="field">
+        <label for="f-status">Статус</label>
+        <select id="f-status">
+          <option value="want">Хочу прочитать</option>
+          <option value="reading">Читаю</option>
+          <option value="read">Прочитано</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="field">
+        <label>Оценка</label>
+        <div class="rating-input" id="ratingInput">
+          <button type="button" data-star="1">★</button>
+          <button type="button" data-star="2">★</button>
+          <button type="button" data-star="3">★</button>
+          <button type="button" data-star="4">★</button>
+          <button type="button" data-star="5">★</button>
+        </div>
+      </div>
+      <div class="field">
+        <label for="f-date">Дата завершения</label>
+        <input id="f-date" type="date">
+      </div>
+    </div>
+
+    <div class="field">
+      <label for="f-review">Впечатления</label>
+      <textarea id="f-review" maxlength="4000" placeholder="О чём книга, что зацепило, кому порекомендуешь…"></textarea>
+    </div>
+
+    <div class="field">
+      <label for="f-quote">Цитата</label>
+      <textarea id="f-quote" maxlength="1000" placeholder="Фраза, которую хочется сохранить" style="min-height:62px"></textarea>
+    </div>
+
+    <div class="actions">
+      <button type="button" class="btn" id="cancelBtn">Отмена</button>
+      <button type="submit" class="btn btn-primary">Сохранить</button>
+    </div>
+  </form>
+</dialog>
+
+<script src="app.js"></script>
+</body>
+</html>
