@@ -1,0 +1,29 @@
+# OS / редакторы
+.DS_Store
+Thumbs.db
+*.swp
+*~
+.vscode/
+.idea/
+
+# Node (если позже добавите сборку)
+node_modules/
+npm-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Логи и временные файлы
+*.log
+*.tmp
+.cache/
+
+# Локальные бэкапы дневника (не коммитьте личные данные)
+reading-diary-*.json
+backup-*.json
+
+# Сборки / артефакты (на будущее)
+dist/
+build/
